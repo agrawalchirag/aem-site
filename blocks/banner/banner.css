@@ -27,6 +27,7 @@
 
 .banner img {
   /* object-fit: cover; */
+  height: 50%;
   width: 100%;
   height: auto;
 }
