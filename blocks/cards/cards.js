@@ -1,6 +1,7 @@
-import { createOptimizedPicture } from '../../scripts/aem.js';
+import { createOptimizedPicture, fetchPlaceholders } from '../../scripts/aem.js';
 
-export default function decorate(block) {
+export default async function decorate(block) {
+  const placeholders = await fetchPlaceholders();
   /* change to ul, li */
   const ul = document.createElement('ul');
   [...block.children].forEach((row) => {
@@ -8,7 +9,16 @@ export default function decorate(block) {
     while (row.firstElementChild) li.append(row.firstElementChild);
     [...li.children].forEach((div) => {
       if (div.children.length === 1 && div.querySelector('picture')) div.className = 'cards-card-image';
-      else div.className = 'cards-card-body';
+      else {
+        div.className = 'cards-card-body';
+        // Add placeholder link
+        const link = document.createElement('a');
+        link.href = '#';
+        link.textContent = placeholders['click-here-more'] || 'Click here for more';
+        const p = document.createElement('p');
+        p.append(link);
+        div.append(p);
+      }
     });
     ul.append(li);
   });
