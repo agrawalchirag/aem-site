@@ -15,8 +15,7 @@ export default async function decorate(block) {
         // Add placeholder link
         const link = document.createElement('a');
         link.href = '#';
-        console.log('placeholders:', placeholders);
-        link.textContent = placeholders['clickheremore'] || 'Click here for more';
+        link.textContent = placeholders.clickheremore || 'Click here for more';
         const p = document.createElement('p');
         p.append(link);
         div.append(p);
