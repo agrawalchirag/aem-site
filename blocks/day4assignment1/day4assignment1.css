@@ -1,24 +1,24 @@
-.day3assignment1 > div {
+.day4assignment1 > div {
   display: flex;
   flex-direction: column;
 }
 
-.day3assignment1 img {
+.day4assignment1 img {
   width: 100%;
 }
 
-.day3assignment1 > div > div {
+.day4assignment1 > div > div {
   order: 1;
 }
 
 @media (width >= 900px) {
-  .day3assignment1 > div {
+  .day4assignment1 > div {
     align-items: center;
     flex-direction: unset;
     gap: 24px;
   }
 
-  .day3assignment1 > div > div {
+  .day4assignment1 > div > div {
     flex: 1;
     order: unset;
   }
