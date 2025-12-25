@@ -269,3 +269,26 @@ pre {
   overflow: scroll;
 }
 
+/* Custom CSS Icon */
+.custom-icon {
+  position: relative;
+  display: inline-block;
+}
+
+.custom-icon::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 10px solid #000; /* Arrow down, change color as needed */
+}
+
+.button.custom-icon {
+  padding-left: 30px; /* Space for icon */
+}
+
