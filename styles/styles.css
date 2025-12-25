@@ -140,6 +140,7 @@ pre {
   background-color: var(--light-color);
   overflow-x: auto;
   white-space: pre;
+  overflow: scroll;
 }
 
 main > div {
@@ -254,19 +255,6 @@ main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
   padding: 40px 0;
-}
-
-code, pre, samp {
-  font-family: var(--fixed-font-family);
-  font-size: var(--body-font-size-s);
-}
-
-code, samp {
-  padding: .125em;
-}
-
-pre {
-  overflow: scroll;
 }
 
 /* Custom CSS Icon */
