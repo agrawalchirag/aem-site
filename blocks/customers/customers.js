@@ -4,14 +4,14 @@ export default async function decorate(block) {
   let currentPage = 0;
   let total = 0;
 
-  function render(data, page) {
+  function render(data, page, onPageChange) {
     currentPage = page;
     const totalPages = Math.ceil(total / pageSize);
 
     const ul = document.createElement('ul');
     ul.className = 'customers';
 
-    data.forEach(customer => {
+    data.forEach((customer) => {
       const li = document.createElement('li');
       li.innerHTML = `
         <h3>${customer['First Name']} ${customer['Last Name']}</h3>
@@ -26,38 +26,31 @@ export default async function decorate(block) {
     const pagination = document.createElement('div');
     pagination.className = 'pagination';
     pagination.innerHTML = `
-      <button id="prev" ${currentPage === 0 ? 'disabled' : ''}>Previous</button>
-      <span>Page ${currentPage + 1} of ${totalPages}</span>
-      <button id="next" ${currentPage === totalPages - 1 ? 'disabled' : ''}>Next</button>
+      <button ${page === 0 ? 'disabled' : ''} data-action="prev">Previous</button>
+      <span>Page ${page + 1} of ${totalPages}</span>
+      <button ${page === totalPages - 1 ? 'disabled' : ''} data-action="next">Next</button>
     `;
 
-    pagination.querySelector('#prev').addEventListener('click', () => {
-      if (currentPage > 0) {
-        loadData(currentPage - 1);
-      }
+    pagination.addEventListener('click', (e) => {
+      if (e.target.dataset.action === 'prev') onPageChange(page - 1);
+      if (e.target.dataset.action === 'next') onPageChange(page + 1);
     });
 
-    pagination.querySelector('#next').addEventListener('click', () => {
-      if (currentPage < totalPages - 1) {
-        loadData(currentPage + 1);
-      }
-    });
-
-    block.innerHTML = '';
-    block.appendChild(ul);
-    block.appendChild(pagination);
+    block.replaceChildren(ul, pagination);
   }
 
   async function loadData(page = 0) {
     const url = `${baseUrl}?limit=${pageSize}&offset=${page * pageSize}`;
+
     try {
       const response = await fetch(url);
-      if (!response.ok) throw new Error('Failed to fetch data');
+      if (!response.ok) throw new Error();
       const json = await response.json();
       total = json.total;
-      render(json.data, page);
-    } catch (error) {
-      block.innerHTML = '<p>Error loading customer data. Please try again later.</p>';
+
+      render(json.data, page, loadData);
+    } catch {
+      block.innerHTML = '<p>Error loading customer data.</p>';
     }
   }
 
