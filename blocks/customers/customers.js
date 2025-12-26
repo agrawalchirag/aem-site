@@ -4,21 +4,6 @@ export default async function decorate(block) {
   let currentPage = 0;
   let total = 0;
 
-  async function loadData(page = 0) {
-    const url = `${baseUrl}?limit=${pageSize}&offset=${page * pageSize}`;
-    try {
-      const response = await fetch(url);
-      console.log('Fetch response:', response);
-      if (!response.ok) throw new Error('Failed to fetch data');
-      const json = await response.json();
-      total = json.total;
-      render(json.data, page);
-    } catch (error) {
-      console.error('Error loading customers:', error);
-      block.innerHTML = '<p>Error loading customer data. Please try again later.</p>';
-    }
-  }
-
   function render(data, page) {
     currentPage = page;
     const totalPages = Math.ceil(total / pageSize);
@@ -61,6 +46,19 @@ export default async function decorate(block) {
     block.innerHTML = '';
     block.appendChild(ul);
     block.appendChild(pagination);
+  }
+
+  async function loadData(page = 0) {
+    const url = `${baseUrl}?limit=${pageSize}&offset=${page * pageSize}`;
+    try {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error('Failed to fetch data');
+      const json = await response.json();
+      total = json.total;
+      render(json.data, page);
+    } catch (error) {
+      block.innerHTML = '<p>Error loading customer data. Please try again later.</p>';
+    }
   }
 
   loadData();
