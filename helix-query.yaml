@@ -1,0 +1,22 @@
+version: 1
+
+indices:
+  website:
+    source: html
+    fetch: true
+    include:
+      - /**
+    properties:
+      path:
+        select: head > meta[property="og:url"]
+        value: |
+          attribute(el, "content") || path
+      title:
+        select: head > title
+        value: text(el)
+      description:
+        select: head > meta[name="description"]
+        value: attribute(el, "content")
+      image:
+        select: head > meta[property="og:image"]
+        value: attribute(el, "content")
