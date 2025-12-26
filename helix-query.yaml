@@ -1,20 +1,10 @@
-version: 1
-
 indices:
-  pages:
-    source: html
-    fetch: true
-    target: /query/pages.json
-
+  english: &default
     include:
-      - /**
+      - /en/**
     exclude:
-      - /nav
-      - /header
-      - /footer
-      - /fragments/**
-      - /docs/**
-
+      - /en/snippets/**
+    target: /query-index.json
     properties:
       path:
         select: path
