@@ -12,7 +12,7 @@
   border: 1px solid #e0e0e0;
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
   transition: transform 0.2s, box-shadow 0.2s;
   display: flex;
   flex-direction: column;
@@ -21,11 +21,11 @@
 
 .customers li:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 16px rgb(0 0 0 / 15%);
 }
 
 .customers li h3 {
-  margin: 0 0 10px 0;
+  margin: 0 0 10px;
   color: var(--text-color);
   font-size: 1.2em;
   font-weight: 600;
@@ -62,14 +62,14 @@
   transition: background-color 0.2s;
 }
 
-.pagination button:hover:not(:disabled) {
-  background-color: var(--link-hover-color);
-}
-
 .pagination button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
   opacity: 0.6;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: var(--link-hover-color);
 }
 
 .pagination span {
@@ -84,7 +84,7 @@
   }
 }
 
-@media (max-width: 599px) {
+@media (width < 600px) {
   .customers {
     grid-template-columns: 1fr;
   }

@@ -38,6 +38,8 @@
 
   /* nav height */
   --nav-height: 64px;
+  --breadcrumbs-height: 34px;
+  --header-height: var(--nav-height);
 }
 
 /* fallback fonts */
@@ -98,6 +100,10 @@ footer .footer[data-block-status="loaded"] {
   visibility: visible;
 }
 
+body[data-breadcrumbs] {
+  --header-height: calc(var(--nav-height) + var(--breadcrumbs-height));
+}
+
 h1,
 h2,
 h3,
@@ -140,7 +146,7 @@ pre {
   background-color: var(--light-color);
   overflow-x: auto;
   white-space: pre;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 main > div {
