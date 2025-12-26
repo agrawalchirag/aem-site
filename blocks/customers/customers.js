@@ -1,11 +1,9 @@
 export default async function decorate(block) {
   const baseUrl = block.dataset.url || '/test.json';
   const pageSize = 20;
-  let currentPage = 0;
   let total = 0;
 
   function render(data, page, onPageChange) {
-    currentPage = page;
     const totalPages = Math.ceil(total / pageSize);
 
     const ul = document.createElement('ul');
