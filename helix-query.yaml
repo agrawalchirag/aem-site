@@ -1,16 +1,23 @@
 version: 1
 
 indices:
-  website:
+  pages:
     source: html
     fetch: true
+    target: /query/pages.json
+
     include:
       - /**
+    exclude:
+      - /nav
+      - /header
+      - /footer
+      - /fragments/**
+      - /docs/**
+
     properties:
       path:
-        select: head > meta[property="og:url"]
-        value: |
-          attribute(el, "content") || path
+        select: path
       title:
         select: head > title
         value: text(el)
